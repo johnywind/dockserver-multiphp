@@ -52,17 +52,17 @@ RUN echo 'deb https://packages.sury.org/php/ stretch main' > /etc/apt/sources.li
 RUN \
     apt-get update && \
     apt-get install -y --no-install-recommends \
-    php7.1 \
-    php7.1-cli \
-    php7.1-curl \
-    php7.1-fpm \
-    php7.1-gd \
-    php7.1-mbstring \
-    php7.1-intl \
-    php7.1-mysqlnd \
-    php7.1-soap \
-    php7.1-zip \
-    php7.1-xml && \
+    php7.2 \
+    php7.2-cli \
+    php7.2-curl \
+    php7.2-fpm \
+    php7.2-gd \
+    php7.2-mbstring \
+    php7.2-intl \
+    php7.2-mysqlnd \
+    php7.2-soap \
+    php7.2-zip \
+    php7.2-xml && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PHP 7.1
