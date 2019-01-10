@@ -1,4 +1,4 @@
-# Magento-multiphp
+# Dockserver-multiphp
 based on https://github.com/leymannx/apache-multiphp
 
 Debian 9 - Apache 2.4 - PHP 5.6, PHP 7.1 and PHP 7.2
