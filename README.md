@@ -1,4 +1,4 @@
-# apache-multiphp
+# apache-mysql-multiphp
 
 Debian 9 - Apache 2.4 - PHP 5.6 and PHP 7.1
 
