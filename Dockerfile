@@ -48,6 +48,22 @@ RUN a2enmod proxy_fcgi rewrite
 RUN curl https://packages.sury.org/php/apt.gpg | apt-key add -
 RUN echo 'deb https://packages.sury.org/php/ stretch main' > /etc/apt/sources.list.d/deb.sury.org.list
 
+# Install PHP 7.2
+RUN \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    php7.1 \
+    php7.1-cli \
+    php7.1-curl \
+    php7.1-fpm \
+    php7.1-gd \
+    php7.1-mbstring \
+    php7.1-intl \
+    php7.1-mysqlnd \
+    php7.1-soap \
+    php7.1-zip \
+    php7.1-xml && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install PHP 7.1
 RUN \
@@ -96,22 +112,20 @@ RUN \
     mv composer.phar /usr/local/bin/composer && \
     composer global require hirak/prestissimo
 
+#SSH
+    RUN apt-get update && apt-get install -y openssh-server
+    RUN mkdir /var/run/sshd
+    RUN echo 'root:root' | chpasswd
+    RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-# Drush 8
-RUN \
-    curl -OL https://github.com/drush-ops/drush/releases/download/8.1.15/drush.phar && \
-    chmod +x drush.phar && \
-    mv drush.phar /usr/local/bin/drush8 && \
-    drush8 init -y
+    # SSH login fix. Otherwise user is kicked off after login
+    RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
+    ENV NOTVISIBLE "in users profile"
+    RUN echo "export VISIBLE=now" >> /etc/profile
 
-# Drush Launcher.
-RUN \
-    curl -OL https://github.com/drush-ops/drush-launcher/releases/download/0.5.1/drush.phar && \
-    chmod +x drush.phar && \
-    mv drush.phar /usr/local/bin/drush && \
-    drush self-update
-
+    EXPOSE 22
+    CMD ["/usr/sbin/sshd", "-D"]
 
 # npm
 RUN \
