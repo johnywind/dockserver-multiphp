@@ -1,23 +1,24 @@
-# apache-mysql-multiphp
+# Magento-multiphp
+based on https://github.com/leymannx/apache-multiphp
 
-Debian 9 - Apache 2.4 - PHP 5.6 and PHP 7.1
+Debian 9 - Apache 2.4 - PHP 5.6, PHP 7.1 and PHP 7.2
 
-1. `$ docker run -p 8856:8856 -p 8871:8871 leymannx/apache-multiphp:0.1.4`
+1. `$ docker run -p 8856:8856 -p 8871:8871 [-v c:/xampp/htdocs:/var/www] johnywind/magento-multiphp`
 2. In your browser visit
    - [http://localhost:8856](http://localhost:8856) for PHP 5.6
    - [http://localhost:8871](http://localhost:8856) for PHP 7.1
-3. Happy, happy!
+   - [http://localhost:8872](http://localhost:8856) for PHP 7.2
+3. Break stuff! :)
 
-## Drupal
+## Magento
 
-Starting with version 0.1.5 this image is going to be drupalized to run multiple Drupal 7 and Drupal 8 projects in parallel.
+I use this image to test Magento (and others) on different PHP versions
 
 Following tools will also be provided:
 
 - Composer
-- Drush 8
-- Drush Launcher
 - npm
+- ssh access (default root/root)
 
 For more info see [Dockerix](https://github.com/leymannx/dockerix) on GitHub.
 
@@ -28,6 +29,7 @@ This image uses Apache's [`mod_proxy_fcgi`](https://httpd.apache.org/docs/2.4/mo
 ```
 Listen 8856
 Listen 8871
+Listen 8872
 
 <VirtualHost *:8856>
 
@@ -66,4 +68,5 @@ Listen 8871
 	</Directory>
 
 </VirtualHost>
+....etc :)
 ```
