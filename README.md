@@ -3,7 +3,10 @@ based on https://github.com/leymannx/apache-multiphp
 
 Debian 9 - Apache 2.4 - PHP 5.6, PHP 7.1 and PHP 7.2
 
-1. `$ docker run -p 8856:8856 -p 8871:8871 [-v c:/xampp/htdocs:/var/www] dockserver-multiphp`
+Build the docker image:
+docker build -t dockserver-multiphp .
+
+1. `$ docker run -p 8856:8856 -p 8871:8871 -p 8872:8872 [-v c:/xampp/htdocs:/var/www] dockserver-multiphp`
 2. In your browser visit
    - [http://localhost:8856](http://localhost:8856) for PHP 5.6
    - [http://localhost:8871](http://localhost:8856) for PHP 7.1
